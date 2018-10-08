@@ -68,6 +68,7 @@ function createCard(game) {
   mainDiv.appendChild(innerDiv);
   mainDiv.appendChild(badge);
   document.getElementsByClassName('games_list')[0].appendChild(mainDiv);
+  //logic
   mainDiv.addEventListener('click', function() {
     console.log(`You selected ${game.name}!`);
     increaseVote();
