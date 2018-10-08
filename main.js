@@ -30,4 +30,40 @@ axios
     console.error('error', e);
   });
 
-function createCard(game) {}
+function createCard(game) {
+  //divs
+  var mainDiv = document.createElement('div');
+  var innerDiv = document.createElement('div');
+  var frontDiv = document.createElement('div');
+  var backDiv = document.createElement('div');
+  var badge = document.createElement('span');
+  //content
+  var badgeText = document.createTextNode(0);
+  var image = document.createElement('img');
+  var thumbnail = game.cover.url;
+  var cover = thumbnail.replace('thumb', 'cover_big'); //increasing img quality
+  image.src = cover;
+  var cardTitle = document.createElement('h4');
+  var titleText = document.createTextNode(`${game.name}`);
+  var parag = document.createElement('p');
+  var paragText = document.createTextNode(
+    `${game.summary ? game.summary : "This game doesn't have a summary."}`
+  );
+  //class definitions
+  mainDiv.className = 'flip-card';
+  innerDiv.className = 'flip-card-inner';
+  frontDiv.className = 'flip-card-front';
+  backDiv.className = 'flip-card-back';
+  //appending
+  badge.appendChild(badgeText);
+  frontDiv.appendChild(image);
+  innerDiv.appendChild(frontDiv);
+  cardTitle.appendChild(titleText);
+  backDiv.appendChild(cardTitle);
+  parag.appendChild(paragText);
+  backDiv.appendChild(parag);
+  innerDiv.appendChild(backDiv);
+  mainDiv.appendChild(innerDiv);
+  mainDiv.appendChild(badge);
+  document.getElementsByClassName('games_list')[0].appendChild(mainDiv);
+}
