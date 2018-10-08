@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+body {
+  background-color: #efefef;
+  font-family: 'Muli', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header_par {
+  color: #47403e;
+}
+
+h1 {
+  color: #f4a7d6ee;
+  font-weight: 900;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+a {
+  font-weight: bolder;
+}
+
+a:hover {
+  color: #f4a7d6ee;
+  text-decoration: underline;
+}
