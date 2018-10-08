@@ -43,7 +43,7 @@ function createCard(game) {
   var thumbnail = game.cover.url;
   var cover = thumbnail.replace('thumb', 'cover_big'); //increasing img quality
   image.src = cover;
-  var cardTitle = document.createElement('h4');
+  var cardTitle = document.createElement('h2');
   var titleText = document.createTextNode(`${game.name}`);
   var parag = document.createElement('p');
   var paragText = document.createTextNode(
@@ -54,6 +54,8 @@ function createCard(game) {
   innerDiv.className = 'flip-card-inner';
   frontDiv.className = 'flip-card-front';
   backDiv.className = 'flip-card-back';
+  cardTitle.className = 'flip-back-text';
+  parag.className = 'flip-back-text';
   //appending
   badge.appendChild(badgeText);
   frontDiv.appendChild(image);
@@ -66,4 +68,11 @@ function createCard(game) {
   mainDiv.appendChild(innerDiv);
   mainDiv.appendChild(badge);
   document.getElementsByClassName('games_list')[0].appendChild(mainDiv);
+  mainDiv.addEventListener('click', function() {
+    console.log(`You selected ${game.name}!`);
+    increaseVote();
+  });
+  function increaseVote() {
+    badgeText.nodeValue = Number(badgeText.nodeValue) + 1;
+  }
 }

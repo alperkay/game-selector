@@ -17,7 +17,6 @@ body {
 
 h1 {
   color: #f4a7d6ee;
-  font-weight: 900;
 }
 
 a:link,
@@ -33,4 +32,77 @@ a {
 a:hover {
   color: #f4a7d6ee;
   text-decoration: underline;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 250px;
+  height: 250px;
+  perspective: 1000px;
+  margin: 10px;
+  float: left;
+  border-radius: 5px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: justify;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+  cursor: pointer;
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /*for Safari*/
+  backface-visibility: hidden;
+  border-radius: 5px;
+}
+
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.flip-back-text {
+  padding: 0 10px 0 10px;
+  user-select: none;
+  font-size: 70%;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 100% !important;
+}
+
+span {
+  font-weight: bold;
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  padding: 3px 9px;
+  border: 2px solid white;
+  border-radius: 100px;
+  background: -webkit-linear-gradient(top, #bbff8b 0%, #5dc414 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.4),
+    0 0 1px rgba(0, 0, 0, 0.7) inset, 0 10px 0px rgba(255, 255, 255, 0.11) inset;
+  user-select: none;
 }
