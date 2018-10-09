@@ -106,3 +106,11 @@ span {
     0 0 1px rgba(0, 0, 0, 0.7) inset, 0 10px 0px rgba(255, 255, 255, 0.11) inset;
   user-select: none;
 }
+
+.games_list {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%);
+}

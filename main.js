@@ -5,22 +5,17 @@ const headers = {
   Accept: 'application/json'
 };
 
+const apiUrl = `${'https://cors-anywhere.herokuapp.com/'}https://api-endpoint.igdb.com/games/`;
+
 axios
-  .get(
-    `${'https://cors-anywhere.herokuapp.com/'}https://api-endpoint.igdb.com/games/?fields=name,popularity&order=popularity:desc`,
-    { headers }
-  )
+  .get(`${apiUrl}?fields=name,popularity&order=popularity:desc`, { headers })
   .then(response => {
-    topTenGamesIds = response.data.map(game => game.id);
-    console.log(topTenGamesIds);
+    let topTenGamesIds = response.data.map(game => game.id);
     return axios
-      .get(
-        `${'https://cors-anywhere.herokuapp.com/'}https://api-endpoint.igdb.com/games/${topTenGamesIds}`,
-        { headers }
-      )
+      .get(`${apiUrl}${topTenGamesIds}`, { headers })
       .then(response => {
         topTenGames = response.data;
-        console.log(topTenGames);
+        document.getElementsByClassName('games_list')[0].innerHTML = '';
         topTenGames.forEach(function(game) {
           createCard(game);
         });
@@ -30,24 +25,27 @@ axios
     console.error('error', e);
   });
 
+document.getElementsByClassName('games_list')[0].innerHTML = 'Loading...';
+
 function createCard(game) {
+  const { cover, name, summary } = game;
   //divs
-  var mainDiv = document.createElement('div');
-  var innerDiv = document.createElement('div');
-  var frontDiv = document.createElement('div');
-  var backDiv = document.createElement('div');
-  var badge = document.createElement('span');
+  const mainDiv = document.createElement('div');
+  const innerDiv = document.createElement('div');
+  const frontDiv = document.createElement('div');
+  const backDiv = document.createElement('div');
+  const badge = document.createElement('span');
   //content
-  var badgeText = document.createTextNode(0);
-  var image = document.createElement('img');
-  var thumbnail = game.cover.url;
-  var cover = thumbnail.replace('thumb', 'cover_big'); //increasing img quality
-  image.src = cover;
-  var cardTitle = document.createElement('h2');
-  var titleText = document.createTextNode(`${game.name}`);
-  var parag = document.createElement('p');
-  var paragText = document.createTextNode(
-    `${game.summary ? game.summary : "This game doesn't have a summary."}`
+  const badgeText = document.createTextNode('0');
+  const image = document.createElement('img');
+  const thumbnail = cover.url;
+  const coverArt = thumbnail.replace('thumb', 'cover_big'); //increasing img quality
+  image.src = coverArt;
+  const cardTitle = document.createElement('h2');
+  const titleText = document.createTextNode(`${name}`);
+  const parag = document.createElement('p');
+  const paragText = document.createTextNode(
+    `${summary ? summary : "This game doesn't have a summary."}`
   );
   //class definitions
   mainDiv.className = 'flip-card';
@@ -70,7 +68,6 @@ function createCard(game) {
   document.getElementsByClassName('games_list')[0].appendChild(mainDiv);
   //logic
   mainDiv.addEventListener('click', function() {
-    console.log(`You selected ${game.name}!`);
     increaseVote();
   });
   function increaseVote() {
